@@ -4,9 +4,11 @@ import { ApiContext } from '../../utils/api_context';
 import { AuthContext } from '../../utils/auth_context';
 import { RolesContext } from '../../utils/roles_context';
 import { Button } from '../common/button';
-import { Ping } from './ping';
+import { useList } from '../../utils/useList';
 
 export const Home = () => {
+  const [item, setItem] = useState('');
+  const [items, addItem, updateItemStatus] = useList();
   const [, setAuthToken] = useContext(AuthContext);
   const api = useContext(ApiContext);
   const roles = useContext(RolesContext);
@@ -43,9 +45,16 @@ export const Home = () => {
           Admin
         </Button>
       )}
-      <section>
-        <Ping />
-      </section>
+
+      <div className="App">
+        <input type="text" value={item} onChange={(e) => setItem(e.target.value)} />
+      </div>
+      <button onClick={() => {
+          addItem(item, user.id);
+        }}
+      >
+        SAVE
+      </button>
     </div>
   );
 };
