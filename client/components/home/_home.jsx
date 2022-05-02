@@ -9,6 +9,7 @@ import { useList } from '../../utils/useList';
 export const Home = () => {
   const [item, setItem] = useState('');
   const [items, addItem, updateItemStatus] = useList();
+  const [myItems, setMyItems] = useState([]);
   const [, setAuthToken] = useContext(AuthContext);
   const api = useContext(ApiContext);
   const roles = useContext(RolesContext);
@@ -30,13 +31,25 @@ export const Home = () => {
     }
   };
 
+  const updateItems = () => {
+    temp = [];
+    items.forEach((x, i) => {
+      if (x.userID == user.id) {
+        temp.push(x);
+      }
+    });
+    setMyItems(temp);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="p-4">
-      <h1>Welcome {user.firstName}</h1>
+    <div className="bg-zinc-700">
+      <h1>
+        Welcome {user.firstName} {user.id}
+      </h1>
       <Button type="button" onClick={logout}>
         Logout
       </Button>
@@ -49,12 +62,28 @@ export const Home = () => {
       <div className="App">
         <input type="text" value={item} onChange={(e) => setItem(e.target.value)} />
       </div>
-      <button onClick={() => {
+      <Button
+        onClick={() => {
           addItem(item, user.id);
         }}
       >
         SAVE
-      </button>
+      </Button>
+
+      <div>
+        {items
+          .filter((item) => item.userID === user.id && item.isCompleted != true)
+          .map((filteredItem) => (
+            <div key={filteredItem.id}>
+              <input
+                type="checkbox"
+                checked={filteredItem.isCompleted}
+                onChange={() => updateItemStatus(filteredItem)}
+              />{' '}
+              {filteredItem.item}
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
