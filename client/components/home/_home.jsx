@@ -55,6 +55,7 @@ export const Home = () => {
           onChange={(e) => setItem(e.target.value)}
         />
         <button
+          class="submit"
           disabled={!item}
           onClick={() => {
             addItem(item, user.id);
