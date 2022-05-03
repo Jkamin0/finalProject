@@ -30,7 +30,6 @@ export const Home = () => {
       setAuthToken(null);
     }
   };
-
   const updateItems = () => {
     temp = [];
     items.forEach((x, i) => {
@@ -46,43 +45,57 @@ export const Home = () => {
   }
 
   return (
-    <div className="bg-zinc-700">
-      <h1>
-        Welcome {user.firstName} {user.id}
-      </h1>
-      <Button type="button" onClick={logout}>
-        Logout
-      </Button>
-      {roles.includes('admin') && (
-        <Button type="button" onClick={() => navigate('/admin')}>
-          Admin
-        </Button>
-      )}
-
-      <div className="App">
-        <input type="text" value={item} onChange={(e) => setItem(e.target.value)} />
-      </div>
-      <Button
-        onClick={() => {
-          addItem(item, user.id);
-        }}
-      >
-        SAVE
-      </Button>
-
+    <div class="main">
+      <h1>{user.firstName}'s Grocery List Using Firebase</h1>      
       <div>
-        {items
-          .filter((item) => item.userID === user.id && item.isCompleted != true)
-          .map((filteredItem) => (
-            <div key={filteredItem.id}>
-              <input
-                type="checkbox"
-                checked={filteredItem.isCompleted}
-                onChange={() => updateItemStatus(filteredItem)}
-              />{' '}
-              {filteredItem.item}
-            </div>
-          ))}
+        <input
+          type="text"
+          placeholder="Enter the name of your item here"
+          value={item}
+          onChange={(e) => setItem(e.target.value)}
+        />
+        <button
+          disabled={!item}
+          onClick={() => {
+            addItem(item, user.id);
+          }}
+        >
+          SAVE
+        </button>
+      </div>
+
+      <div class="columns">
+        <div class="toBuy">
+          <h2>Items to Buy: </h2>
+          {items
+            .filter((item) => item.userID === user.id && item.isCompleted != true)
+            .map((filteredItem) => (
+              <div key={filteredItem.id}>
+                <input
+                  type="checkbox"
+                  checked={filteredItem.isCompleted}
+                  onChange={() => updateItemStatus(filteredItem)}
+                />{' '}
+                <span class="items">{filteredItem.item}</span>
+              </div>
+            ))}
+        </div>
+
+        <div class="bought">
+          <h2>Items Purchased: </h2>
+          {items
+            .filter((item) => item.userID === user.id && item.isCompleted === true)
+            .map((filteredItem) => (
+              <div key={filteredItem.id}>
+                <input
+                  type="checkbox"
+                  checked={filteredItem.isCompleted}
+                  onChange={() => updateItemStatus(filteredItem)}
+                />{' '}
+                <span class="items">{filteredItem.item}</span>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

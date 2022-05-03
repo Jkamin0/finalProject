@@ -3,3 +3,71 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.main {
+    background-color: lightblue;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.columns {
+    background-color: #E6D677;
+    display: flex;
+    height: 100%;
+}
+
+.toBuy {
+    width: 50%;
+    padding: 15px;
+    border-right:1px solid black;
+
+}
+
+.bought {
+    width: 50%;
+    padding: 15px;
+}
+
+.items {
+    font-size: 30;
+}
+
+input[type=checkbox]{    
+    width: 15px; height: 15px; 
+       
+  }
+
+input[type=text]{    
+    width: 80%;  
+    height: 100%; 
+    font-size: 30px;
+    border:2px solid black;
+}
+
+h1 {
+    font-size: 100;
+    text-align: center;
+}
+
+h2 {
+    font-size: 40;
+}
+
+button {
+    height: 100%;
+    width: 20%;
+    font-size: 30;
+    transition-duration: .4s;
+    border:2px solid black;
+    border-left:none;
+
+
+}
+
+button:hover {
+    background-color: #F0B26C; 
+    color: white;
+
+
+}
