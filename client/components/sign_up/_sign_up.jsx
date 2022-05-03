@@ -59,9 +59,9 @@ export const SignUp = () => {
       <div className="w-96">
         <Paper>
           <div>First Name</div>
-          <Input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           <div>Last Name</div>
-          <Input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
           <div>Email</div>
           <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <div>Confirm Email</div>
