@@ -46,7 +46,7 @@ export const Home = () => {
 
   return (
     <div class="main">
-      <h1>{user.firstName}'s Grocery List Using Firebase</h1>      
+      <h1>{user.firstName}'s Grocery List Using Firebase</h1>
       <div>
         <input
           type="text"
